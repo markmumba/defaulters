@@ -4,8 +4,17 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from .forms import *
 # Create your views here.
-def welcome(request):
-    return HttpResponse('Welcome to the Neighbourhood')
+
+def index(request):
+    try:
+        if not request.user.is_authenticated:
+            return redirect('/accounts/login/')
+        current_user=request.user
+        profile =Profile.objects.get(username=current_user)
+    except ObjectDoesNotExist:
+        return redirect('create-profile')
+    return render(request,'index.html')
+
 
 
 @login_required(login_url='/accounts/login/')
