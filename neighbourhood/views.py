@@ -64,6 +64,14 @@ def update_profile(request):
 
     return render(request,'profile/update_profile.html',{"form":form})
 
+
+@login_required(login_url='/accounts/login/')
+def blog(request):
+    current_user=request.user
+    profile=Profile.objects.get(username=current_user)
+    blogposts = BlogPost.objects.filter(neighbourhood=profile.neighbourhood)
+
+
 @login_required(login_url='/accounts/login/')
 def new_blogpost(request):
     current_user=request.user
@@ -84,4 +92,6 @@ def new_blogpost(request):
         form = BlogPostForm()
 
     return render(request,'blogpost_form.html',{"form":form})
+
+
 
