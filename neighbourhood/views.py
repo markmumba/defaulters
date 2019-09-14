@@ -91,7 +91,7 @@ def view_blog(request,id):
     else:
         form = CommentForm()
 
-    return render(request,'view_blog.html',{"blog":blog,"form":form,"comments":comments})
+    return render(request,'blog/view_blog.html',{"blog":blog,"form":form,"comments":comments})
 
 
 @login_required(login_url='/accounts/login/')
