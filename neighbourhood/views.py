@@ -91,7 +91,7 @@ def new_blogpost(request):
     else:
         form = BlogPostForm()
 
-    return render(request,'blogpost_form.html',{"form":form})
+    return render(request,'blog/blogpost_form.html',{"form":form})
 
 
 
