@@ -9,6 +9,7 @@ urlpatterns=[
     url(r'^user/(?P<username>\w{0,50})',views.user_profile,name='user-profile'),
     url(r'^create/profile$',views.create_profile, name='create-profile'),
     url(r'^update/profile$',views.update_profile, name='update-profile'),
+    url(r'^blog',views.blog, name='blog'),
     url(r'^new/blogpost$',views.new_blogpost, name='new-blogpost'), 
 ]
 
