@@ -48,7 +48,7 @@ class Comment(models.Model):
     post = models.ForeignKey(BlogPost,on_delete=models.CASCADE)
 
 class Business(models.Model):
-    logo = models.ImageField(upload_to='businesslogo/')
+    logo = models.ImageField(upload_to='logos/')
     description = HTMLField()
     neighbourhood = models.ForeignKey(neighbourhood,on_delete=models.CASCADE)
     owner = models.ForeignKey(User,on_delete=models.CASCADE)
