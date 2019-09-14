@@ -12,7 +12,7 @@ urlpatterns=[
     url(r'^blog',views.blog, name='blog'),
     url(r'^new/blogpost$',views.new_blogpost, name='new-blogpost'), 
     url(r'^view/blog/(\d+)',views.view_blog,name='view_blog'),
-    url(r'^blog',views.businesses, name='business'),
+    url(r'^business',views.businesses, name='business'),
 
 ]
 

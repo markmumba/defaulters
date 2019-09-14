@@ -126,6 +126,26 @@ def businesses(request):
 
     return render(request,'business/businesses.html',{"businesses":businesses})
 
+@login_required(login_url='/accounts/login/')
+def new_business(request):
+    current_user=request.user
+    profile =Profile.objects.get(username=current_user)
+
+    if request.method=="POST":
+        form =BusinessForm(request.POST,request.FILES)
+        if form.is_valid():
+            business = form.save(commit = False)
+            business.owner = current_user
+            business.neighbourhood = profile.neighbourhood
+            business.save()
+
+        return HttpResponseRedirect('/businesses')
+
+    else:
+        form = BusinessForm()
+
+    return render(request,'business_form.html',{"form":form})
+
 
 
 
