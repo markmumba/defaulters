@@ -11,6 +11,7 @@ urlpatterns=[
     url(r'^update/profile$',views.update_profile, name='update-profile'),
     url(r'^blog',views.blog, name='blog'),
     url(r'^new/blogpost$',views.new_blogpost, name='new-blogpost'), 
+    url(r'^view/blog/(\d+)',views.view_blog,name='view_blog'),
 ]
 
 if settings.DEBUG:
