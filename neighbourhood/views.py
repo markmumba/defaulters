@@ -83,7 +83,7 @@ def new_blogpost(request):
             blogpost = form.save(commit = False)
             blogpost.username = current_user
             blogpost.neighbourhood = profile.neighbourhood
-            blogpost.avatar = profile.avatar
+            blogpost.profpic = profile.profpic
             blogpost.save()
 
         return HttpResponseRedirect('/blog')
