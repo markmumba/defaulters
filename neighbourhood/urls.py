@@ -16,6 +16,7 @@ urlpatterns=[
     url(r'^new/business$',views.new_business, name='new-business'),
     url(r'^health',views.health, name='health'),
     url(r'^authorities',views.authorities, name='authorities')
+    url(r'^notifications',views.notification, name='notifications'), 
 ] 
 
 if settings.DEBUG:
