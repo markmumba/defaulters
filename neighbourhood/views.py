@@ -169,7 +169,7 @@ def notification(request):
     profile=Profile.objects.get(username=current_user)
     all_notifications = notifications.objects.filter(neighbourhood=profile.neighbourhood)
 
-    return render(request,'notifications.html',{"notifications":all_notifications})
+    return render(request,'notifications/notifications.html',{"notifications":all_notifications})
 
 @login_required(login_url='/accounts/login/')
 def new_notification(request):
@@ -185,7 +185,7 @@ def new_notification(request):
             notification.save()
 
             if notification.priority == 'High Priority':
-                send_priority_email(profile.name,profile.email,notification.title,notification.notification,notification.author,notification.neighbourhood)
+                send_email(profile.name,profile.email,notification.title,notification.notification,notification.author,notification.neighbourhood)
 
         return HttpResponseRedirect('/notifications')
 
