@@ -20,7 +20,7 @@ class neighbourhood(models.Model):
 class Profile(models.Model):
     profpic = models.ImageField(upload_to='profpics/')
     description = HTMLField()
-    # neighbourhood = models.ForeignKey(neighbourhood,on_delete=models.CASCADE)
+    neighbourhood = models.ForeignKey(neighbourhood,on_delete=models.CASCADE)
     username = models.ForeignKey(User,on_delete=models.CASCADE)
     name =models.CharField(max_length=100)
     email = models.EmailField()
