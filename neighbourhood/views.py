@@ -117,3 +117,5 @@ def new_blogpost(request):
 
 
 
+
+
