@@ -15,11 +15,8 @@ urlpatterns=[
     url(r'^business',views.businesses, name='business'),
     url(r'^new/business$',views.new_business, name='new-business'),
     url(r'^health',views.health, name='health'),
-     url(r'^health',views.authorities, name='authorities'), 
-
+    url(r'^authorities',views.authorities, name='authorities')
 ] 
-
-]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
