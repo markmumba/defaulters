@@ -162,3 +162,13 @@ def authorities(request):
 
     return render(request,'authorities/authorities.html',{"authorities":authorities})
 
+
+@login_required(login_url='/accounts/login/')
+def notification(request):
+    current_user=request.user
+    profile=Profile.objects.get(username=current_user)
+    all_notifications = notifications.objects.filter(neighbourhood=profile.neighbourhood)
+
+    return render(request,'notifications.html',{"notifications":all_notifications})
+
+
