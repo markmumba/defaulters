@@ -13,6 +13,7 @@ urlpatterns=[
     url(r'^new/blogpost$',views.new_blogpost, name='new-blogpost'), 
     url(r'^view/blog/(\d+)',views.view_blog,name='view_blog'),
     url(r'^business',views.businesses, name='business'),
+    url(r'^new/business$',views.new_business, name='new-business'),
 
 ]
 
