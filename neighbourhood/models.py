@@ -5,7 +5,7 @@ from tinymce.models import HTMLField
 # Create your models here.
 
 class Profile(models.Model):
-    avatar = models.ImageField(upload_to='profpics/')
+    profpic = models.ImageField(upload_to='profpics/')
     description = HTMLField()
     # neighbourhood = models.ForeignKey(neighbourhood,on_delete=models.CASCADE)
     username = models.ForeignKey(User,on_delete=models.CASCADE)
