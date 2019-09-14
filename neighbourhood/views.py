@@ -63,3 +63,25 @@ def update_profile(request):
         form = ProfileForm()
 
     return render(request,'profile/update_profile.html',{"form":form})
+
+@login_required(login_url='/accounts/login/')
+def new_blogpost(request):
+    current_user=request.user
+    profile =Profile.objects.get(username=current_user)
+
+    if request.method=="POST":
+        form =BlogPostForm(request.POST,request.FILES)
+        if form.is_valid():
+            blogpost = form.save(commit = False)
+            blogpost.username = current_user
+            blogpost.neighbourhood = profile.neighbourhood
+            blogpost.avatar = profile.avatar
+            blogpost.save()
+
+        return HttpResponseRedirect('/blog')
+
+    else:
+        form = BlogPostForm()
+
+    return render(request,'blogpost_form.html',{"form":form})
+
