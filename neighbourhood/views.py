@@ -3,6 +3,7 @@ from django.http import HttpResponse,Http404,HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from .forms import *
+from .emails import *
 # Create your views here.
 
 def index(request):
