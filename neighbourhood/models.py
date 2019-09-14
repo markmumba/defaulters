@@ -4,10 +4,25 @@ from tinymce.models import HTMLField
 
 # Create your models here.
 
+class neighbourhood(models.Model):
+    neighbourhood= models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.neighbourhood
+
+    def save_neighbourhood(self):
+        self.save()
+
+    @classmethod
+    def delete_neighbourhood(cls,neighbourhood):
+        cls.objects.filter(neighbourhood=neighbourhood).delete()
+
+
+
 class Profile(models.Model):
     profpic = models.ImageField(upload_to='profpics/')
     description = HTMLField()
-    # neighbourhood = models.ForeignKey(neighbourhood,on_delete=models.CASCADE)
+    neighbourhood = models.ForeignKey(neighbourhood,on_delete=models.CASCADE)
     username = models.ForeignKey(User,on_delete=models.CASCADE)
     name =models.CharField(max_length=100)
     email = models.EmailField()
@@ -20,7 +35,7 @@ class BlogPost(models.Model):
     image = models.ImageField(upload_to='post/')
     post = HTMLField()
     username = models.ForeignKey(User,on_delete=models.CASCADE)
-    # neighbourhood= models.ForeignKey(neighbourhood,on_delete=models.CASCADE)
+    neighbourhood= models.ForeignKey(neighbourhood,on_delete=models.CASCADE)
     post_date = models.DateTimeField(auto_now_add=True)
     profpic = models.ImageField(upload_to='profpics/')
 
