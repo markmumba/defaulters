@@ -160,5 +160,5 @@ def authorities(request):
     profile=Profile.objects.get(username=current_user)
     authorities = Authorities.objects.filter(neighbourhood=profile.neighbourhood)
 
-    return render(request,'authorities.html',{"authorities":authorities})
+    return render(request,'authorities/authorities.html',{"authorities":authorities})
 
