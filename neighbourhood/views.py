@@ -11,7 +11,7 @@ def welcome(request):
 def my_profile(request):
     current_user=request.user
     profile =Profile.objects.get(username=current_user)
-    return render(request,'user_profile.html',{"profile":profile})
+    return render(request,'profile/user_profile.html',{"profile":profile})
 
 
 @login_required(login_url='/accounts/login/')
@@ -33,4 +33,4 @@ def create_profile(request):
     else:
 
         form = ProfileForm()
-        return render(request,'profile_form.html',{"form":form})
+        return render(request,'profile/profile_form.html',{"form":form})
