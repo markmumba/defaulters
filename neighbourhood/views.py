@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
 def welcome(request):
-    return HttpResponse('Welcome to the Moringa Tribune')
+    return HttpResponse('Welcome to the Neighbourhood')
 
 
 @login_required(login_url='/accounts/login/')
