@@ -71,6 +71,8 @@ def blog(request):
     profile=Profile.objects.get(username=current_user)
     blogposts = BlogPost.objects.filter(neighbourhood=profile.neighbourhood)
 
+    return render(request,'blog/blogs.html',{"blogposts":blogposts})
+
 @login_required(login_url='/accounts/login/')
 def view_blog(request,id):
     current_user = request.user
