@@ -14,6 +14,7 @@ urlpatterns=[
     url(r'^view/blog/(\d+)',views.view_blog,name='view_blog'),
     url(r'^business',views.businesses, name='business'),
     url(r'^new/business$',views.new_business, name='new-business'),
+    url(r'^health',views.health, name='health'), 
 
 ]
 

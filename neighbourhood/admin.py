@@ -6,3 +6,5 @@ admin.site.register(Profile);
 admin.site.register(neighbourhood);
 admin.site.register(BlogPost);
 admin.site.register(Business);
+admin.site.register(Health);
+admin.site.register(healthservices);
