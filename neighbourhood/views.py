@@ -195,3 +195,20 @@ def new_notification(request):
         form = notificationsForm()
 
     return render(request,'notifications/notifications_form.html',{"form":form})
+
+@login_required(login_url='/accounts/login/')
+def search_results(request):
+    current_user = request.user
+    profile =Profile.objects.get(username=current_user)
+    if 'business' in request.GET and request.GET["business"]:
+        search_term = request.GET.get("business")
+        searched_businesses = Business.search_business(search_term)
+        message=f"{search_term}"
+
+        print(searched_projects)
+
+        return render(request,'business/search.html',{"message":message,"businesses":searched_businesses,"profile":profile})
+
+    else:
+        message="You haven't searched for any term"
+        return render(request,'business/search.html',{"message":message})
