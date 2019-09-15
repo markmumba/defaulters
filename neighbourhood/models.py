@@ -66,6 +66,11 @@ class Business(models.Model):
     def __str__(self):
         return self.name
     
+    @classmethod
+    def search_business(cls,search_term):
+        businesses = cls.objects.filter(name__icontains=search_term)
+        return businesses
+    
 
 class healthservices(models.Model):
     healthservices = models.CharField(max_length=100)
