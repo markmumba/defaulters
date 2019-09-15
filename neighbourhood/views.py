@@ -205,7 +205,7 @@ def search_results(request):
         searched_businesses = Business.search_business(search_term)
         message=f"{search_term}"
 
-        print(searched_projects)
+        print(searched_businesses)
 
         return render(request,'business/search.html',{"message":message,"businesses":searched_businesses,"profile":profile})
 

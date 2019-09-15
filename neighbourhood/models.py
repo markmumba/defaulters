@@ -68,7 +68,7 @@ class Business(models.Model):
     
     @classmethod
     def search_business(cls,search_term):
-        businesses = cls.objects.filter(name__icontains=search_term)
+        businesses = cls.objects.filter(description__icontains=search_term)
         return businesses
     
 
