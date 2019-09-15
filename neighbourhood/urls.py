@@ -17,7 +17,8 @@ urlpatterns=[
     url(r'^health',views.health, name='health'),
     url(r'^authorities',views.authorities, name='authorities'),
     url(r'^notifications',views.notification, name='notifications'),
-    url(r'^new/notification$',views.new_notification, name='new-notification'), 
+    url(r'^new/notification$',views.new_notification, name='new-notification'),
+    url(r'^search/',views.search_results, name='search_results'), 
 ] 
 
 if settings.DEBUG:
