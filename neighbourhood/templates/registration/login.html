@@ -13,25 +13,23 @@
 
 
         <div class="col-md-4 form-section">
-            {{form.media}}
 
             {% if form.errors %}
-            <p>Please enter correct value</p>
+            <p>Password or Username is incorrect</p>
             {% endif %}
 
-            <div class="panel panel-default" style="margin-top:150px;">
+            <div class="panel panel-default" style="margin-top:280px;">
 
                 <div class="panel-body">
-
+                        <img alt="IG" src="http://www.nairobibusinessmonthly.com/wp-content/uploads/2017/09/1185653211adc064092a681acf400e11148895e8.jpg" height=300 class="img-fluid">
                     <div class="text-center">
-                        <h3>Create your profile</h3>
-                        <form action="{% url 'create-profile' %}" method="post" enctype="multipart/form-data">
+                        <form action="/accounts/login/" method="post">
 
                             {% csrf_token%}
                             {% bootstrap_form form %}
 
                             <div class="form-group">
-                                <input type="submit" class="btn btn-primary login-button" value="Post">
+                                <input type="submit" class="btn btn-primary login-button" value="Log in">
 
                             </div>
                             <input type="hidden" name="next" value="/">
@@ -40,6 +38,12 @@
                     </div>
                 </div>
 
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body text-center">
+                    <p> Don't have an account? <span><a class="" href="/accounts/register">Sign Up</a></span></p>
+                </div>
             </div>
 
         </div>
@@ -65,10 +69,8 @@
         border-color: inherit;
     }
 
-    input,
-    h3 {
+    input {
         text-align: center;
-        color: white;
     }
 </style> -->
 {% endblock %}
