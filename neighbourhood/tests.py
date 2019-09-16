@@ -14,11 +14,11 @@ class neighbourhoodTestClass(TestCase):
         neighbourhood.objects.all().delete()
 
     def test_save_method(self):
-        self.Kasarani.create_neighbourhood()
+        self.Kasarani.save_neighbourhood()
         hood = neighbourhood.objects.all()
         self.assertTrue(len(hood)>0)
 
-    # def test_delete_method(self):
-    #     self.Kasarani.delete_neighbourhood('Kasarani')
-    #     hood = neighbourhood.objects.all()
-	# 	self.assertTrue(len(hood) == 0)
+    def test_delete_method(self):
+        self.Kasarani.delete_neighbourhood('Kasarani')
+        hood = neighbourhood.objects.all()
+		self.assertTrue(len(hood)==0)
