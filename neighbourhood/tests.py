@@ -1,46 +1,44 @@
 from django.test import TestCase
-from .models import *
+from .models import neighbourhood,healthservices
 from django.contrib.auth.models import User
 import datetime as dt
 # Create your tests here.
-
-class BusinessClass(TestCase):
-    # Set up method
+class neighbourhoodTestClass(TestCase):
     def setUp(self):
-        self.user = User.objects.create_user(username='Emmanuel')
-        self.profile = Profile(username = self.user)
-        self.profile.save()
-        self.business = Business(id=1,logo = 'logos/',description='Entertainment',owner=self.user,name='Pillarframe',email='emmanuel.muchiri@outlook.com',contact='0706915605',address='59160')
+        self.Kasarani = neighbourhood(neighbourhood='Kasarani')
 
-#     #Testing instance
     def test_instance(self):
-        self.assertTrue(isinstance(self.business,Business))
+        self.assertTrue(isinstance(self.Kasarani,neighbourhood))
 
-# #     #Testing Save method
-#     def test_save_project(self):
-#         self.project.save_project()
-#         projects = Project.objects.all()
-#         self.assertTrue(len(projects) > 0)
+    def tearDown(self):
+        neighbourhood.objects.all().delete()
 
-# #     #Testing print all Method
-#     def test_print_all(self):
-#         self.project.print_all()
-#         projects= Project.objects.all()
-#         self.assertTrue((len(projects) > -1))
-# #     
+    def test_save_method(self):
+        self.Kasarani.save_neighbourhood()
+        hood = neighbourhood.objects.all()
+        self.assertTrue(len(hood)>0)
 
-# class ProfileTestClass(TestCase):
-#     # Set up method
+    def test_delete_method(self):
+        self.Kasarani.delete_neighbourhood('Kasarani')
+        hood = neighbourhood.objects.all()
+        self.assertTrue(len(hood)==0)
+
+# class healthservicesTestClass(TestCase):
 #     def setUp(self):
-#         self.user = User.objects.create_user(username='Emmanuel')
-#         self.profile = Profile(id=1,profpic='/profpics/',bio='test bio',username = self.user,email='emmanuel.muchiri@outlook.com')
+#         self.Radiotherapy = healthservices(healthservices='Radiotherapy')
 
-#     #Testing instance
 #     def test_instance(self):
-#         self.assertTrue(isinstance(self.profile,Profile))
+#         self.assertTrue(isinstance(self.Radiotherapy,healthservices))
 
-#     # Testing save method
-#     def test_save_profile(self):
-#         self.profile.save_profile()
-#         profiles = Profile.objects.all()
-#         self.assertTrue(len(profiles) > 0)
+#     def tearDown(self):
+#         healthservices.objects.all().delete()
+
+#     def test_save_method(self):
+#         self.Radiotherapy.save_healthservices()
+#         health = healthservices.objects.all()
+#         self.assertTrue(len(health)>0)
+
+#     def test_delete_method(self):
+#         self.Radiotherapy.delete_healthservices('Radiotherapy')
+#         health = healthservices.objects.all()
+#         self.assertTrue(len(health)==0)
