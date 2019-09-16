@@ -13,8 +13,8 @@ class neighbourhoodTestClass(TestCase):
     def tearDown(self):
         neighbourhood.objects.all().delete()
 
-    def test_save_method(self):
-        self.Kasarani.save_neighbourhood()
+    def test_create_method(self):
+        self.Kasarani.create_neighbourhood()
         hood = neighbourhood.objects.all()
         self.assertTrue(len(hood)>0)
 

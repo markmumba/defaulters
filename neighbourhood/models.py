@@ -16,7 +16,7 @@ class neighbourhood(models.Model):
     def __str__(self):
         return self.neighbourhood
 
-    def save_neighbourhood(self):
+    def create_neighbourhood(self):
         self.save()
 
     @classmethod
