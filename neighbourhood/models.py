@@ -35,24 +35,6 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.name
-
-class BlogPost(models.Model):
-    title = models.CharField(max_length=150)
-    image = models.ImageField(upload_to='post/')
-    post = HTMLField()
-    username = models.ForeignKey(User,on_delete=models.CASCADE)
-    neighbourhood= models.ForeignKey(neighbourhood,on_delete=models.CASCADE)
-    post_date = models.DateTimeField(auto_now_add=True)
-    profpic = models.ImageField(upload_to='profpics/')
-
-    def __str__(self):
-        return self.title
-
-class Comment(models.Model):
-    comment = models.CharField(max_length=300)
-    username = models.ForeignKey(User,on_delete=models.CASCADE)
-    post = models.ForeignKey(BlogPost,on_delete=models.CASCADE)
-
 class Business(models.Model):
     logo = models.ImageField(upload_to='logos/')
     description = HTMLField()
@@ -70,6 +52,28 @@ class Business(models.Model):
     def search_business(cls,search_term):
         businesses = cls.objects.filter(description__icontains=search_term)
         return businesses
+
+class BlogPost(models.Model):
+    name = models.CharField(max_length=150)
+    image = models.ImageField(upload_to='post/')
+    post = HTMLField()
+    username = models.ForeignKey(User,on_delete=models.CASCADE)
+    neighbourhood= models.ForeignKey(neighbourhood,on_delete=models.CASCADE)
+    house = models.ManyToManyField(Business)
+    post_date = models.DateTimeField(auto_now_add=True)
+    from_date = models.DateField()
+    to_date = models.DateField()
+    profpic = models.EmailField()
+
+    def __str__(self):
+        return self.title
+
+class Comment(models.Model):
+    comment = models.CharField(max_length=300)
+    username = models.ForeignKey(User,on_delete=models.CASCADE)
+    post = models.ForeignKey(BlogPost,on_delete=models.CASCADE)
+
+
     
 
 class healthservices(models.Model):

@@ -123,7 +123,9 @@ def new_blogpost(request):
 def businesses(request):
     current_user=request.user
     profile=Profile.objects.get(username=current_user)
-    businesses = Business.objects.filter(neighbourhood=profile.neighbourhood)
+    # businesses = Business.objects.filter(neighbourhood=profile.neighbourhood)
+    businesses = Business.objects.all()
+
 
     return render(request,'business/businesses.html',{"businesses":businesses})
 

@@ -1,7 +1,10 @@
-from django.conf.urls import url
+from django.conf.urls import url,include
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth.views import logout
+
+
 
 urlpatterns=[
     url(r'^$',views.index,name='Index'),
@@ -19,6 +22,8 @@ urlpatterns=[
     url(r'^notifications',views.notification, name='notifications'),
     url(r'^new/notification$',views.new_notification, name='new-notification'),
     url(r'^search/',views.search_results, name='search_results'), 
+    url('', include('social_django.urls', namespace='social')),
+    url('logout/', logout, {'next_page': settings.LOGOUT_REDIRECT_URL},name='logout')
 ] 
 
 if settings.DEBUG:
