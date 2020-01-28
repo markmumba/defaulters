@@ -53,25 +53,30 @@ class Business(models.Model):
         businesses = cls.objects.filter(description__icontains=search_term)
         return businesses
 
-class BlogPost(models.Model):
+class defaulter(models.Model):
     name = models.CharField(max_length=150)
+    id_number = models.CharField(max_length=12)
     image = models.ImageField(upload_to='post/')
+    phone_number = models.CharField(max_length=12)
     post = HTMLField()
-    username = models.ForeignKey(User,on_delete=models.CASCADE)
+    n_o_k_name = models.CharField(max_length=150)
+    n_o_k_phone_number = models.CharField(max_length=12)
     neighbourhood= models.ForeignKey(neighbourhood,on_delete=models.CASCADE)
-    house = models.ManyToManyField(Business)
+    house = models.ForeignKey(Business,on_delete=models.CASCADE,default=None)
     post_date = models.DateTimeField(auto_now_add=True)
     from_date = models.DateField()
     to_date = models.DateField()
-    profpic = models.EmailField()
+    email_address = models.EmailField()
+    username = models.ForeignKey(User,on_delete=models.CASCADE)
+
 
     def __str__(self):
-        return self.title
+        return self.name
 
 class Comment(models.Model):
     comment = models.CharField(max_length=300)
     username = models.ForeignKey(User,on_delete=models.CASCADE)
-    post = models.ForeignKey(BlogPost,on_delete=models.CASCADE)
+    post = models.ForeignKey(defaulter,on_delete=models.CASCADE)
 
 
     
