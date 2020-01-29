@@ -72,6 +72,11 @@ class defaulter(models.Model):
 
     def __str__(self):
         return self.name
+    
+    @classmethod
+    def search_defaulter(cls,search_term):
+        defaulters = cls.objects.filter(id_number__icontains=search_term)
+        return defaulters
 
 class Comment(models.Model):
     comment = models.CharField(max_length=300)

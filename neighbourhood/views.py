@@ -176,3 +176,20 @@ def search_results(request):
     else:
         message="You haven't searched for any term"
         return render(request,'business/search.html',{"message":message})
+
+@login_required(login_url='/accounts/login/')
+def search_defaulters(request):
+    current_user = request.user
+    profile =Profile.objects.get(username=current_user)
+    if 'defaulter' in request.GET and request.GET["defaulter"]:
+        search_term = request.GET.get("defaulter")
+        searched_defaulters = defaulter.search_defaulter(search_term)
+        message=f"{search_term}"
+
+        print(searched_defaulters)
+
+        return render(request,'defaulter/search.html',{"message":message,"defaulters":searched_defaulters,"profile":profile})
+
+    else:
+        message="You haven't searched for any term"
+        return render(request,'defaulter/search.html',{"message":message})

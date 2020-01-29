@@ -19,6 +19,7 @@ urlpatterns=[
     url(r'^notifications',views.notification, name='notifications'),
     url(r'^new/notification$',views.new_notification, name='new-notification'),
     url(r'^search/',views.search_results, name='search_results'), 
+    url(r'^SearchDefaulter/',views.search_defaulters, name='search_defaulters'), 
     url('', include('social_django.urls', namespace='social')),
     url('logout/', logout, {'next_page': settings.LOGOUT_REDIRECT_URL},name='logout')
 ] 

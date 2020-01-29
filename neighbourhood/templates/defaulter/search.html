@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+{% load staticfiles %}
+
+{% block content %}
+<div class=" container row text-center">
+    {% if defaulters %}
+    <h2> Found {{defaulters|length}} defaulters with the search term "{{message}}"</h2>
+    {% else %}
+    <h2> Found 0 defaulters for the search term "{{message}}"</h2>
+    {% endif %}
+</div>
+
+
+{% if defaulters %}
+<div class="row">
+    {% for defaulter in defaulters %}
+    <div class="col-md-6">
+        <div class="card" style="width: 20rem;margin-top:10px;">
+            <div class="card-body">
+                <h3 class="card-title" data-toggle="modal" data-target="#{{defaulter.id}}">
+                    {{defaulter.name|truncatechars:19}}</h3>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="{{defaulter.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content text-center">
+                <div class="modal-header text-center">
+                    <h3 class="text-center">Name : {{defaulter.name}}</h3>
+                </div>
+                <div class="modal-body">
+                    <p class="pmodal">{{defaulter.defaulter|safe}}</p>
+                    <img class="card-img-top" src="{{defaulter.image.url}}" height=200 width=100>
+
+                </div>
+                <div class="modal-footer" style="display:block;">
+                    <p><span style="font-weight:bold;">Next Of Kin Name:</span> {{defaulter.n_o_k_name}}</p>
+                    <p><span style="font-weight:bold;">Next Of Kin Number:</span>
+                        {{defaulter.n_o_k_phone_number}}</p>
+                    <p><span style="font-weight:bold;">Neighbourhood:</span>
+                        {{defaulter.neighbourhood}}</p>
+                    <p><span style="font-weight:bold;">House:</span>
+                        {{defaulter.house}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock %}
