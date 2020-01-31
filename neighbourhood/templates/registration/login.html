@@ -35,6 +35,11 @@
                             <input type="hidden" name="next" value="/">
 
                         </form>
+                        <!-- <li class="nav-item"> -->
+                            <i class="fa fa-google" aria-hidden="true"></i>
+
+                            <a class="btn btn-primary" href="{% url 'social:begin' 'google-oauth2' %}">Sign in with gmail</a>
+                        <!-- </li> -->
                     </div>
                 </div>
 
@@ -43,6 +48,10 @@
             <div class="panel panel-default">
                 <div class="panel-body text-center">
                     <p> Don't have an account? <span><a class="" href="/accounts/register">Sign Up</a></span></p>
+                
+                    <!-- <li>
+                        <a class="btn btn-primary" href="{% url 'social:begin' 'google-oauth2' %}">
+                    </li> -->
                 </div>
             </div>
 

@@ -67,15 +67,15 @@ def update_profile(request):
 
 
 @login_required(login_url='/accounts/login/')
-def blog(request):
+def defaulterer(request):
     current_user=request.user
     profile=Profile.objects.get(username=current_user)
-    blogposts = BlogPost.objects.filter(neighbourhood=profile.neighbourhood)
+    defaulters = defaulter.objects.all()
 
-    return render(request,'blog/blogs.html',{"blogposts":blogposts})
+    return render(request,'defaulter/defaulters.html',{"defaulters":defaulters})
 
 @login_required(login_url='/accounts/login/')
-def view_blog(request,id):
+def view_defaulter(request,id):
     current_user = request.user
 
     try:
@@ -83,87 +83,51 @@ def view_blog(request,id):
     except:
         comments =[]
 
-    blog = BlogPost.objects.get(id=id)
+    default = defaulter.objects.get(id=id)
     if request.method =='POST':
         form = CommentForm(request.POST,request.FILES)
         if form.is_valid():
             comment = form.save(commit=False)
             comment.username = current_user
-            comment.post = blog
+            comment.post = default
             comment.save()
     else:
         form = CommentForm()
 
-    return render(request,'blog/view_blog.html',{"blog":blog,"form":form,"comments":comments})
+    return render(request,'defaulter/view_defaulters.html',{"defaulter":defaulter,"form":form,"comments":comments})
 
 
 @login_required(login_url='/accounts/login/')
-def new_blogpost(request):
+def new_defaulter(request):
     current_user=request.user
     profile =Profile.objects.get(username=current_user)
 
     if request.method=="POST":
-        form =BlogPostForm(request.POST,request.FILES)
+        form =DefaulterForm(request.POST,request.FILES)
         if form.is_valid():
-            blogpost = form.save(commit = False)
-            blogpost.username = current_user
-            blogpost.neighbourhood = profile.neighbourhood
-            blogpost.profpic = profile.profpic
-            blogpost.save()
+            defaulter = form.save(commit = False)
+            defaulter.username = current_user
+            defaulter.neighbourhood = profile.neighbourhood
+            defaulter.save()
 
-        return HttpResponseRedirect('/blog')
+        return HttpResponseRedirect('/defaulters')
 
     else:
-        form = BlogPostForm()
+        form = DefaulterForm()
 
-    return render(request,'blog/blogpost_form.html',{"form":form})
+    return render(request,'defaulter/defaulter_form.html',{"form":form})
 
 
 @login_required(login_url='/accounts/login/')
 def businesses(request):
     current_user=request.user
     profile=Profile.objects.get(username=current_user)
-    businesses = Business.objects.filter(neighbourhood=profile.neighbourhood)
+    # businesses = Business.objects.filter(neighbourhood=profile.neighbourhood)
+    businesses = Business.objects.all()
+
 
     return render(request,'business/businesses.html',{"businesses":businesses})
-
-@login_required(login_url='/accounts/login/')
-def new_business(request):
-    current_user=request.user
-    profile =Profile.objects.get(username=current_user)
-
-    if request.method=="POST":
-        form =BusinessForm(request.POST,request.FILES)
-        if form.is_valid():
-            business = form.save(commit = False)
-            business.owner = current_user
-            business.neighbourhood = profile.neighbourhood
-            business.save()
-
-        return HttpResponseRedirect('/businesses')
-
-    else:
-        form = BusinessForm()
-
-    return render(request,'business/business_form.html',{"form":form})
-
-@login_required(login_url='/accounts/login/')
-def health(request):
-    current_user=request.user
-    profile=Profile.objects.get(username=current_user)
-    healthservices = Health.objects.filter(neighbourhood=profile.neighbourhood)
-
-    return render(request,'health/health.html',{"healthservices":healthservices})
-
-@login_required(login_url='/accounts/login/')
-def authorities(request):
-    current_user=request.user
-    profile=Profile.objects.get(username=current_user)
-    authorities = Authorities.objects.filter(neighbourhood=profile.neighbourhood)
-
-    return render(request,'authorities/authorities.html',{"authorities":authorities})
-
-
+    
 @login_required(login_url='/accounts/login/')
 def notification(request):
     current_user=request.user
@@ -212,3 +176,20 @@ def search_results(request):
     else:
         message="You haven't searched for any term"
         return render(request,'business/search.html',{"message":message})
+
+@login_required(login_url='/accounts/login/')
+def search_defaulters(request):
+    current_user = request.user
+    profile =Profile.objects.get(username=current_user)
+    if 'defaulter' in request.GET and request.GET["defaulter"]:
+        search_term = request.GET.get("defaulter")
+        searched_defaulters = defaulter.search_defaulter(search_term)
+        message=f"{search_term}"
+
+        print(searched_defaulters)
+
+        return render(request,'defaulter/search.html',{"message":message,"defaulters":searched_defaulters,"profile":profile})
+
+    else:
+        message="You haven't searched for any term"
+        return render(request,'defaulter/search.html',{"message":message})

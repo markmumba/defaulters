@@ -35,24 +35,6 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.name
-
-class BlogPost(models.Model):
-    title = models.CharField(max_length=150)
-    image = models.ImageField(upload_to='post/')
-    post = HTMLField()
-    username = models.ForeignKey(User,on_delete=models.CASCADE)
-    neighbourhood= models.ForeignKey(neighbourhood,on_delete=models.CASCADE)
-    post_date = models.DateTimeField(auto_now_add=True)
-    profpic = models.ImageField(upload_to='profpics/')
-
-    def __str__(self):
-        return self.title
-
-class Comment(models.Model):
-    comment = models.CharField(max_length=300)
-    username = models.ForeignKey(User,on_delete=models.CASCADE)
-    post = models.ForeignKey(BlogPost,on_delete=models.CASCADE)
-
 class Business(models.Model):
     logo = models.ImageField(upload_to='logos/')
     description = HTMLField()
@@ -70,6 +52,38 @@ class Business(models.Model):
     def search_business(cls,search_term):
         businesses = cls.objects.filter(description__icontains=search_term)
         return businesses
+
+class defaulter(models.Model):
+    name = models.CharField(max_length=150)
+    id_number = models.CharField(max_length=12)
+    image = models.ImageField(upload_to='post/')
+    phone_number = models.CharField(max_length=12)
+    comments = models.CharField(max_length=150,default=None)
+    Next_Of_Kin_Name = models.CharField(max_length=150,default=None)
+    Next_Of_Kin_Phone_Number = models.CharField(max_length=12,default=None)
+    neighbourhood= models.ForeignKey(neighbourhood,on_delete=models.CASCADE)
+    house = models.ForeignKey(Business,on_delete=models.CASCADE,default=None)
+    post_date = models.DateTimeField(auto_now_add=True)
+    from_date = models.DateField()
+    to_date = models.DateField()
+    email_address = models.EmailField()
+    username = models.ForeignKey(User,on_delete=models.CASCADE)
+
+
+    def __str__(self):
+        return self.name
+    
+    @classmethod
+    def search_defaulter(cls,search_term):
+        defaulters = cls.objects.filter(id_number__icontains=search_term)
+        return defaulters
+
+class Comment(models.Model):
+    comment = models.CharField(max_length=300)
+    username = models.ForeignKey(User,on_delete=models.CASCADE)
+    post = models.ForeignKey(defaulter,on_delete=models.CASCADE)
+
+
     
 
 class healthservices(models.Model):
