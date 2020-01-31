@@ -12,9 +12,6 @@
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'business'%}">Businesses</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'defaulters'%}">Notifications</a>
-            </li>
             <li class="nav navbar-nav navbar-right">
                 <form class="navbar-form" role="search" action="{% url 'search_results'%}">
                     <div class="input-group">
@@ -22,6 +19,10 @@
                     </div>
                 </form>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'defaulters'%}">Defaulters</a>
+            </li>
+
             <li class="nav navbar-nav navbar-right">
                 <form class="navbar-form" role="search" action="{% url 'search_defaulters'%}">
                     <div class="input-group">
