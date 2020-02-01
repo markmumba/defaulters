@@ -43,7 +43,7 @@ class Business(models.Model):
     name =models.CharField(max_length=100)
     email = models.EmailField()
     address =models.CharField(max_length=100)
-    contact = models.IntegerField()
+    contact = models.CharField(max_length=12)
 
     def __str__(self):
         return self.name
