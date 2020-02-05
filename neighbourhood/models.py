@@ -66,6 +66,7 @@ class defaulter(models.Model):
     post_date = models.DateTimeField(auto_now_add=True)
     from_date = models.DateField()
     to_date = models.DateField()
+    amount =models.CharField(max_length=1000,default=None)
     email_address = models.EmailField()
     username = models.ForeignKey(User,on_delete=models.CASCADE)
 
