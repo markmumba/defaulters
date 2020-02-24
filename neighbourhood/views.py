@@ -127,38 +127,6 @@ def businesses(request):
 
 
     return render(request,'business/businesses.html',{"businesses":businesses})
-    
-@login_required(login_url='/accounts/login/')
-def notification(request):
-    current_user=request.user
-    profile=Profile.objects.get(username=current_user)
-    all_notifications = notifications.objects.filter(neighbourhood=profile.neighbourhood)
-
-    return render(request,'notifications/notifications.html',{"notifications":all_notifications})
-
-@login_required(login_url='/accounts/login/')
-def new_notification(request):
-    current_user=request.user
-    profile =Profile.objects.get(username=current_user)
-
-    if request.method=="POST":
-        form =notificationsForm(request.POST,request.FILES)
-        if form.is_valid():
-            notification = form.save(commit = False)
-            notification.author = current_user
-            notification.neighbourhood = profile.neighbourhood
-            notification.save()
-
-            if notification.priority == 'High Priority':
-                send_email(profile.name,profile.email,notification.title,notification.notification,notification.author,notification.neighbourhood)
-
-        return HttpResponseRedirect('/notifications')
-
-
-    else:
-        form = notificationsForm()
-
-    return render(request,'notifications/notifications_form.html',{"form":form})
 
 @login_required(login_url='/accounts/login/')
 def search_results(request):

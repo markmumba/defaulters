@@ -5,9 +5,14 @@ from tinymce.models import HTMLField
 # Create your models here.
 
 
-Priority=(
-    ('Low Priority','Low Priority'),
-    ('High Priority','High Priority'),
+Kintype=(
+    ('Wife','Wife'),
+    ('Husband','Husband'),
+    ('Son','Son'),
+    ('Daughter','Daughter'),
+    ('Mother','Mother'),
+    ('Father','Father'),
+    ('Other','Other')
 )
 
 class neighbourhood(models.Model):
@@ -60,6 +65,7 @@ class defaulter(models.Model):
     phone_number = models.CharField(max_length=12)
     comments = models.CharField(max_length=150,default=None)
     Next_Of_Kin_Name = models.CharField(max_length=150,default=None)
+    Next_Of_Kin_Relationship = models.CharField(max_length=15,choices=Kintype,default="Wife")
     Next_Of_Kin_Phone_Number = models.CharField(max_length=12,default=None)
     neighbourhood= models.ForeignKey(neighbourhood,on_delete=models.CASCADE)
     house = models.ForeignKey(Business,on_delete=models.CASCADE,default=None)
@@ -84,55 +90,6 @@ class Comment(models.Model):
     username = models.ForeignKey(User,on_delete=models.CASCADE)
     post = models.ForeignKey(defaulter,on_delete=models.CASCADE)
 
-
-    
-
-class healthservices(models.Model):
-    healthservices = models.CharField(max_length=100)
-
     def __str__(self):
-        return self.healthservices
-
-    def save_healthservices(self):
-        self.save()
-
-    @classmethod
-    def delete_healthservices(cls,healthservices):
-        cls.objects.filter(healthservices=healthservices).delete()
-
-class Health(models.Model):
-    logo = models.ImageField(upload_to='healthlogo/')
-    neighbourhood = models.ForeignKey(neighbourhood,on_delete=models.CASCADE)
-    name =models.CharField(max_length=100)
-    email = models.EmailField()
-    contact = models.IntegerField()
-    address =models.CharField(max_length=100)
-    healthservices = models.ManyToManyField(healthservices)
-
-    def __str__(self):
-        return self.name
-
-
-class Authorities(models.Model):
-    neighbourhood = models.ForeignKey(neighbourhood,on_delete=models.CASCADE)
-    name =models.CharField(max_length=100)
-    email = models.EmailField()
-    contact = models.IntegerField()
-    address =models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.name
-    
-
-class notifications(models.Model):
-    title = models.CharField(max_length=100)
-    notification = HTMLField()
-    priority = models.CharField(max_length=15,choices=Priority,default="Informational")
-    author = models.ForeignKey(User,on_delete=models.CASCADE)
-    neighbourhood = models.ForeignKey(neighbourhood,on_delete=models.CASCADE)
-    post_date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.title
-
+        return self.comment
 
