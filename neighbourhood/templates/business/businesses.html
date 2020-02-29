@@ -3,57 +3,76 @@
 {% load staticfiles %}
 
 
+
 {% block content %}
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-12 top-div" style="margin-top:40px;"></div>
-    </div>
+<style>
+    .card:hover {
+        box-shadow: 0 50px 66px 0 rgba(0, 0, 0, 0.2);
+    }
+   
+</style>
 
-    <div class="text-center">
-    </div>
-    <div class="row">
-        {% for business in businesses %}
-        <div class="col-md-6">
-            <div class="card" style="width: 20rem;margin-top:10px;">
-                <div class="card-body">
-                    <h3 class="card-title" data-toggle="modal" data-target="#{{business.id}}">
-                        {{business.name|truncatechars:19}}</h3>
-                </div>
-            </div>
+<body  style="background: url('https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940') center center no-repeat; background-size: 100%; height: 700px; background-attachment: fixed;">
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 top-div" style="margin-top:40px;"></div>
         </div>
 
-
-
-        <!-- Modal -->
-        <div class="modal fade" id="{{business.id}}" tabindex="-1" role="dialog"
-            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content text-center">
-                    <div class="modal-header text-center">
-                        <h3 class="text-center">{{business.name}}</h3>
-                    </div>
-                    <div class="modal-body">
-                        <img class="card-img-top" src="{{business.logo.url}}" height=200 width=100>
-
-                        <p><span style="font-weight:bold;">Owner:</span> {{business.owner}}</p>
-                        <p><span style="font-weight:bold;">Description:</span> {{business.description|safe}}</p>
-                    </div>
-                    <div class="modal-footer" style="display:block;">
-
-                        <h4 class="text-center">Contacts</h4>
-                        <p><span class="bold">Phone Number:</span> {{business.contact}}</p>
-                        <p><span class="bold">Address:</span> {{business.address}}</p>
-                        <p><span class="bold">Email:</span> {{business.email}}</p>
+        <div class="text-center">
+        </div>
+        <div class="row" >
+            {% for business in businesses %}
+            <div class="col-md-6">
+                <div class="card" style=" box-shadow: 0 60px 55px 0 rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+            width: 60%;
+          background-color: #323031;
+          color: rgb(255, 255, 255);">
+                    <div class="card-body" style="font-family: 'Poppins'; text-transform: uppercase; ">
+                        <h3 class="card-title" data-toggle="modal" data-target="#{{business.id}}">
+                            {{business.name|truncatechars:19}}</h3>
                     </div>
 
                 </div>
+                <br>
+                <br>
             </div>
-        </div>
-        {% endfor %}
-    </div>
 
-</div>
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="{{business.id}}" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content text-center">
+                        <div class="modal-header text-center">
+                            <h3 class="text-center" style="text-transform: uppercase; font-family: 'Poppins';">{{business.name}}</h3>
+                        </div>
+                        <div class="modal-body" style="font-family: 'Poppins';">
+                            <img class="card-img-top" style="height: 15%; width: 50%;"    src="{{business.logo.url}}" >
+
+                            <p><span style="font-weight:bold;">Owner:</span> {{business.owner}}</p>
+                            <p><span style="font-weight:bold;">Description:</span> {{business.description|safe}}</p>
+                        </div>
+                        <div class="modal-footer" style="display:block; font-family: 'Poppins';">
+
+                            <h4 class="text-center" style="font-weight:bold;">Contacts</h4>
+                            <p><span class="bold">Phone Number:</span> {{business.contact}}</p>
+                            <p><span class="bold">Address:</span> {{business.address}}</p>
+                            <p><span class="bold">Email:</span> {{business.email}}</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</body>
 <!-- <style>
     .bold {
         font-weight: bold;
